@@ -1,0 +1,50 @@
+<p>actualiza-orden works!</p>
+
+
+<div class="container">
+
+  <form class="form-group" (ngSubmit)="accion_orden()">
+
+    <div class="form-group row">
+      <div class="form-group col-md-4">
+        <label for="nombre">Nombre del Combo:</label>
+        <input type="text" name="nombreCombo" id="nombreCombo" class="form-control" [(ngModel)]="cuadroNombreCombo">
+      </div>
+  
+      <div class="form-group col-md-4">
+        <label for="nombre">Costo:</label>
+        <input type="number" name="costo" id="costo" placeholder="Ingrese el costo" class="form-control" [(ngModel)]="cuadroCosto">
+      </div>
+  
+      <div class="form-group col-md-4">
+        <label for="nombre">Vendedor:</label>
+        <input type="text" name="vendedor" id="vendedor" placeholder="Nombre del vendedor" class="form-control" [(ngModel)]="cuadroVendedor">
+      </div>
+    </div>
+
+    <div class="form-group row mt-4">
+
+      <div class="form-group col-md-4">
+        <label for="nombre">Cliente:</label>
+        <input type="text" name="cliente" id="cliente" placeholder="Nombre del cliente" class="form-control" [(ngModel)]="cuadroCliente">
+      </div>
+
+      <div class="form-group col-md-4">
+        <label for="nombre">Fecha:</label>
+        <input type="date" [min]="minDate" [max]="maxDate" name="fecha" id="fecha" class="form-control" [(ngModel)]="cuadroFecha">
+      </div>
+
+      <div class="form-group col-md-4">
+        <label for="nombre">Propina:</label>
+        <input type="number" name="propina" id="propina" placeholder="Ingrese el monto de propina" class="form-control" [(ngModel)]="cuadroPropina">
+      </div>
+
+    </div>
+
+    <div class="mt-4" style="text-align: center;">
+      <button type="submit" class="btn btn-outline-success"> Actualizar Orden</button>
+    </div>
+
+  </form><br>
+
+</div>

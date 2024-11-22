@@ -1,0 +1,63 @@
+<br>
+
+<div class="container">
+  <div class="card" id="card-orden">
+    <div class="card-body"><br>
+      <h3 class="title">{{title}}</h3>
+      <form class="form-group" name="form-nueva-orden" id="form-nueva-orden" #formNuevaOrden="ngForm">
+
+        <div class="form-group row">
+          <div class="form-group col-md-4">
+            <label for="nombre">Nombre del Combo:</label>
+            <select name="nombreCombo" id="nombreCombo" class="form-control" [(ngModel)]="cuadroNombreCombo" (change)="onComboChange($event)">
+              <option *ngFor="let combo of combos" [value]="combo.nombreCombo">{{ combo.nombreCombo }}</option>
+            </select>
+          </div>
+      
+          <div class="form-group col-md-4">
+            <label for="nombre">Costo:</label>
+            <input type="number" name="costo" id="costo" placeholder="Ingrese el costo" class="form-control" [(ngModel)]="cuadroCosto" [disabled]="mostrarInputCosto">
+          </div>
+      
+          <div class="form-group col-md-4">
+            <label for="nombre">Vendedor:</label>
+            <input type="text" name="vendedor" id="vendedor" placeholder="Nombre del vendedor" class="form-control" [(ngModel)]="cuadroVendedor">
+          </div>
+        </div>
+    
+        <div class="form-group row mt-4">
+    
+          <div class="form-group col-md-4">
+            <label for="nombre">Cliente:</label>
+            <input type="text" name="cliente" id="cliente" placeholder="Nombre del cliente" class="form-control" [(ngModel)]="cuadroCliente">
+          </div>
+    
+          <div class="form-group col-md-4">
+            <label for="nombre">Fecha:</label>
+            <input type="date" [min]="minDate" [max]="maxDate" name="fecha" id="fecha" class="form-control" [(ngModel)]="cuadroFecha">
+          </div>
+    
+          <div class="form-group col-md-4">
+            <label for="nombre">Propina:</label>
+            <input type="number" name="propina" id="propina" placeholder="Ingrese el monto de propina" class="form-control" [(ngModel)]="cuadroPropina">
+          </div>
+    
+        </div>
+
+        <div class="mt-4" style="text-align: center;">
+          <button type="submit" class="btn btn-success btn-lg me-4" (click)="guardar_orden()"> CONFIRMAR ORDEN</button>
+          <button type="submit" class="btn btn-danger btn-lg" (click)="limpiarFormulario(formNuevaOrden)"> CANCELAR ORDEN</button>
+        </div>
+
+      </form><br>
+  </div>
+</div>
+
+<br>
+<p>Listado de ordenes</p>
+
+<div id="contenedor-ordenes">
+  <app-ordenes *ngFor="let orden of ordenes; let i = index" [ordenesLista]="orden" [indice]="i"></app-ordenes>
+</div>
+</div>
+
