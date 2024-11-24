@@ -12,7 +12,7 @@ export class combosService{
   constructor (private servicioAlerta: ServicioAlertaService, private dataCombosServices: DataCombosServices){}
 
   agregar_combo_servicio (combo: combo){
-    this.servicioAlerta.muestra_mensaje("Nueva combo ingresado");
+    this.servicioAlerta.muestra_mensaje("Nuevo combo ingresado");
     this.combos.push(combo);
     this.dataCombosServices.guardar_combo(this.combos);
   }
@@ -30,7 +30,7 @@ export class combosService{
     comboModificado.descripcion = combo.descripcion;
     comboModificado.estado = combo.estado;
 
-    this.dataCombosServices.actualizar_combo_posicion;
+    this.dataCombosServices.actualizar_combo_posicion(indice, combo);
   }
 
   eliminar_combo (indice: number){

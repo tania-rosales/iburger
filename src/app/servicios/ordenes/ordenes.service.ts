@@ -31,7 +31,7 @@ export class ordenesService{
     ordenModificada.fecha = orden.fecha;
     ordenModificada.propina = orden.propina;
 
-    this.dataService.actualizar_orden_posicion;
+    this.dataService.actualizar_orden_posicion(indice, orden);
   }
 
   eliminar_orden (indice: number){

@@ -23,7 +23,7 @@ export class DataCombosServices {
   actualizar_combo_posicion(indice: number, combo: combo){
     let url = "https://iburger-6f44d-default-rtdb.firebaseio.com/combos/" + indice + ".json";
 
-    this.httpClient.put(url, combo).subscribe(response =>console.log("Se ha actualizado la orden " + response),
+    this.httpClient.put(url, combo).subscribe(response =>console.log("Se ha actualizado el combo " + response),
     error =>console.log("Error: "+ error))
   }
 
@@ -31,7 +31,7 @@ export class DataCombosServices {
     let url = "https://iburger-6f44d-default-rtdb.firebaseio.com/combos/" + indice + ".json";
 
     this.httpClient.delete(url).subscribe( 
-      response => console.log("Se ha eliminado la orden " + response),
+      response => console.log("Se ha eliminado el combo " + response),
       error => console.log("Error: " + error))
   }
 }
