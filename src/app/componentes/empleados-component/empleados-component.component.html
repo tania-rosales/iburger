@@ -1,1 +1,151 @@
-<p>empleados-component works!</p>
+<br>
+<!-- Contenedor para los botones -->
+
+
+  <div class="container">
+    <div id="buttons">
+      <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        <i class="fa-solid fa-user-plus"></i> Nuevo Empleado
+      </button>
+  
+      <button type="button" class="btn btn-outline-warning" [routerLink]="'/'">
+        <i class="fa-solid fa-burger"></i> Nueva Orden
+      </button>
+    </div>
+  </div><br><br>
+
+<!-- Fin contenedor botones -->
+
+<!-- Modal Inicio -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Nuevo Empleado</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+<!-- ***************************************************** -->
+<!-- ***************************************************** -->
+<!-- *****ACÁ COMIENZA EL FORMULARIO PARA EL COMBO ******* -->
+
+<form class="form-group" name="form-nuevo-combo" id="form-nuevo-combo" #formNuevoEmpleado="ngForm">
+
+  <div class="form-group row">
+    
+    <div class="form-group col-md-4">
+      <label for="nombre">Nombre</label>
+      <input type="text" name="empleado" id="empleado" placeholder="Ingrese el nombre del empleado" class="form-control" [(ngModel)]="cuadroNombre" required
+      minlength="3"
+      #empleado="ngModel">
+      <div *ngIf="empleado.invalid && empleado.touched" class="text-danger">
+        <small *ngIf="empleado.errors?.['required']">El nombre es obligatorio.</small>
+        <small *ngIf="empleado.errors?.['minlength']">El nombre debe tener al menos 3 caracteres.</small>
+      </div>
+      
+    </div>
+
+    <div class="form-group col-md-4">
+      <label for="apellido">Apellido</label>
+      <input type="text" name="apellido" id="apellido" placeholder="Ingrese el apellido del empleado" class="form-control" [(ngModel)]="cuadroApellido" required
+      #apellido="ngModel">
+      <div *ngIf="apellido.invalid && apellido.touched" class="text-danger">
+        <small>El apellido es obligatorio.</small>
+      </div>
+    </div>
+
+    <div class="form-group col-md-4">
+      <label for="cargo">Cargo</label>
+      <input type="text" name="cargo" id="cargo" placeholder="Ingrese el cargo del empleado" class="form-control" [(ngModel)]="cuadroCargo" required
+      #cargo="ngModel">
+      <div *ngIf="cargo.invalid && cargo.touched" class="text-danger">
+        <small>El cargo es obligatorio.</small>
+      </div>
+    </div>
+
+  </div>
+  <div class="form-group row mt-4">
+    
+    <div class="form-group col-md-4">
+      <label for="salario">Salario:</label>
+      <input type="number"  name="salario" id="salario" class="form-control" [(ngModel)]="cuadroSalario" placeholder="Ingrese salario" required
+      min="364.80"
+      #salario="ngModel">
+      <div *ngIf="salario.invalid && salario.touched" class="text-danger">
+        <small *ngIf="salario.errors?.['required']">El salario es obligatorio.</small>
+        <small *ngIf="salario.errors?.['min']">El salario debe ser mayor que $364.80.</small>
+      </div>
+    </div>
+    
+    <div class="form-group col-md-4">
+      <label for="fecha">Fecha de nacimiento:</label>
+      <input type="date" [max]="maxDate" name="fecha" id="fecha" class="form-control" [(ngModel)]="cuadroFechaNacimiento" required
+      #fecha="ngModel">
+      <div *ngIf="fecha.invalid && fecha.touched" class="text-danger">
+        <small>La fecha de nacimiento es obligatoria y no puede ser posterior a hoy.</small>
+      </div>
+    </div>
+
+    <div class="form-group col-md-4">
+      <label for="fecha">Sexo:</label>
+      <select name="sexo" id="sexo" class="form-control" [(ngModel)]="cuadroSexo" required
+      #sexo="ngModel">
+        <option value="Masculino">Masculino</option>
+        <option value="Femenino">Femenino</option>
+      </select>
+      <div *ngIf="sexo.invalid && sexo.touched" class="text-danger">
+        <small>Seleccione un sexo.</small>
+      </div>
+    </div>
+
+    
+
+  </div>
+
+
+</form>
+
+<!-- *****ACÁ TERMINA EL FORMULARIO PARA EL COMBO ******* -->
+<!-- ***************************************************** -->
+<!-- ***************************************************** -->
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-success me-4" (click)="guardar_empleado()" data-bs-dismiss="modal" [disabled]="formNuevoEmpleado.invalid">CONFIRMAR</button>
+        <button type="submit" class="btn btn-primary me-4" (click)="limpiarFormulario(formNuevoEmpleado)">LIMPIAR FORMULARIO</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal Final -->
+
+
+<!-- Listado de Empleados -->
+
+<div class="container table-responsive">
+  <table class="table table-dark table-hover">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Empleado</th>
+        <th scope="col">Cargo</th>
+        <th scope="col">Salario</th>
+        <th scope="col">Fecha de nacimiento</th>
+        <th scope="col">Sexo</th>
+        <th scope="col">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let empleado of empleados; let i = index">
+        <th scope="row">{{i+1}}</th>
+        <td>{{empleado.nombreEmpleado}} {{empleado.apellidoEmpleado}}</td>
+        <td>{{empleado.cargo}}</td>
+        <td>$ {{empleado.salario}}</td>
+        <td>{{empleado.fechaNacimiento}}</td>
+        <td>{{empleado.sexo}}</td>
+        <td><a class="btn btn-outline-warning me-2" [routerLink]="['actualizaEmpleado', i]" [queryParams]="{accion: '1'}">Actualizar</a>
+          <a class="btn btn-outline-danger" [routerLink]="['actualizaEmpleado', i]" [queryParams]="{accion: '2'}">Eliminar</a></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
