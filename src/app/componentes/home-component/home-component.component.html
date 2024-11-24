@@ -21,7 +21,10 @@
       
           <div class="form-group col-md-4">
             <label for="nombre">Vendedor:</label>
-            <input type="text" name="vendedor" id="vendedor" placeholder="Nombre del vendedor" class="form-control" [(ngModel)]="cuadroVendedor">
+            <!-- <input type="text" name="vendedor" id="vendedor" placeholder="Nombre del vendedor" class="form-control" [(ngModel)]="cuadroVendedor"> -->
+            <select name="vendedor" id="vendedor" class="form-control" [(ngModel)]="cuadroVendedor">
+              <option *ngFor="let empleado of empleados" [value]="empleado.nombreEmpleado+' ' + empleado.apellidoEmpleado">{{ empleado.nombreEmpleado}} {{empleado.apellidoEmpleado}}</option>
+            </select>
           </div>
         </div>
     

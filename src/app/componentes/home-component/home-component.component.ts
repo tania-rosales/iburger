@@ -7,12 +7,14 @@ import { ordenesService } from '../../servicios/ordenes/ordenes.service';
 import { ServicioAlertaService } from '../../servicios/servicio-alerta.service';
 import { combo } from '../../modelos/nuevo-combo.models';
 import { combosService } from '../../servicios/combos/combos.service';
+import { empleado } from '../../modelos/nuevo-empleado.models';
+import { empleadosService } from '../../servicios/empleados/empleados.service';
 
 @Component({
   selector: 'app-home-component',
   standalone: true,
   imports: [CommonModule, FormsModule, OrdenesComponent],
-  providers: [ServicioAlertaService, combosService],
+  providers: [ServicioAlertaService, combosService, empleadosService],
   templateUrl: './home-component.component.html',
   styleUrl: './home-component.component.css'
 })
@@ -21,6 +23,7 @@ export class HomeComponentComponent implements OnInit{
 
   ordenes:orden[];
   combos: combo[];
+  empleados: empleado[];
   cuadroNombreCombo: string = "";
   cuadroCosto: number = 0;
   cuadroVendedor: string = "";
@@ -34,7 +37,7 @@ export class HomeComponentComponent implements OnInit{
   indice: number;
   mostrarInputCosto: boolean;
   
-  constructor (private miAlerta: ServicioAlertaService, private ordenesService:ordenesService, private combosService: combosService){
+  constructor (private miAlerta: ServicioAlertaService, private ordenesService:ordenesService, private combosService: combosService, private empleadosService: empleadosService){
     const today = new Date();
     const year = today.getFullYear();
     const month = (today.getMonth() + 1).toString().padStart(2, '0');
@@ -56,6 +59,7 @@ export class HomeComponentComponent implements OnInit{
     );    
     
     this.lista_combo();
+    this.lista_empleado();
     
   }
 
@@ -92,6 +96,16 @@ export class HomeComponentComponent implements OnInit{
       }
     )
   }
+
+  lista_empleado(){
+    this.empleadosService.obtener_empleados().subscribe(
+      listaEmpleado => {
+        this.empleados = Object.values(listaEmpleado);
+        this.empleadosService.set_empleados(this.empleados)
+      }
+    )
+  }
+
 
   onComboChange (event: any) {
     const selectedIndex = event.target.selectedIndex;
