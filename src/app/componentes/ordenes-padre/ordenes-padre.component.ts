@@ -4,6 +4,7 @@ import { OrdenesComponent } from '../ordenes/ordenes.component';
 import { orden } from '../../modelos/nueva-orden.models';
 import { ordenesService } from '../../servicios/ordenes/ordenes.service';
 import { ServicioAlertaService } from '../../servicios/servicio-alerta.service';
+
 @Component({
   selector: 'app-ordenes-padre',
   standalone: true,
