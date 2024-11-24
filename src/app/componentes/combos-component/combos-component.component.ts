@@ -15,8 +15,6 @@ import { RouterModule } from '@angular/router';
   styleUrl: './combos-component.component.css'
 })
 export class CombosComponentComponent implements OnInit{
-  @Input() combosLista: combo;
-  @Input() indice: number;
 
   titulo = 'Combos';
 

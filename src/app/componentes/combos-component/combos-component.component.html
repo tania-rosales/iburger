@@ -1,8 +1,15 @@
 <br>
+
 <div class="container">
-  <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
-    <i class="fas fa-utensils me-2"></i>Nuevo Combo
-  </button>
+  <div id="buttons">
+    <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      <i class="fas fa-utensils me-2"></i>Nuevo Combo
+    </button>
+
+    <button type="button" class="btn btn-outline-warning" [routerLink]="'/'">
+      <i class="fa-solid fa-burger"></i> Nueva Orden
+    </button>
+  </div>
 </div><br><br>
 
 <!-- Modal Inicio -->
@@ -28,12 +35,12 @@
     </div>
 
     <div class="form-group col-md-4">
-      <label for="nombre">Costo:</label>
+      <label for="costo">Costo:</label>
       <input type="number" name="costo" id="costo" placeholder="Ingrese el costo" class="form-control" [(ngModel)]="cuadroCostoCombo">
     </div>
 
     <div class="form-group col-md-4">
-      <label for="nombre">Fecha:</label>
+      <label for="fecha">Fecha:</label>
       <input type="date" [min]="minDate" [max]="maxDate" name="fecha" id="fecha" class="form-control" [(ngModel)]="cuadroFecha">
     </div>
   </div>
@@ -81,11 +88,9 @@
           <td>{{combo.nombreCombo}}</td>
           <td>{{combo.descripcion}}</td>
           <td>{{combo.costo}}</td>
-          <td><a class="btn btn-outline-warning" [routerLink]="['actualizaCombo', i]" [queryParams]="{accion: '1'}">Actualizar</a>
-            <a class="btn btn-outline-danger ml-1" [routerLink]="['actualizaCombo', i]" [queryParams]="{accion: '2'}">Eliminar</a></td>
+          <td><a class="btn btn-outline-warning me-2" [routerLink]="['actualizaCombo', i]" [queryParams]="{accion: '1'}">Actualizar</a>
+            <a class="btn btn-outline-danger" [routerLink]="['actualizaCombo', i]" [queryParams]="{accion: '2'}">Eliminar</a></td>
         </tr>
       </tbody>
     </table>
   </div>
-
-  <!-- <app-actualiza-combo></app-actualiza-combo> -->

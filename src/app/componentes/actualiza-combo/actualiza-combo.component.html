@@ -1,7 +1,7 @@
 <div class="container">
-  <form class="form-group" name="form-nuevo-combo" id="form-nuevo-combo" #formNuevoCombo="ngForm">
+  <form class="form-group" (ngSubmit)="accion_combo()">
 
-    <div class="form-group row" (ngSubmit)="accion_combo()">
+    <div class="form-group row" >
       
       <div class="form-group col-md-4">
         <label for="nombre">Nombre del Combo:</label>
@@ -26,7 +26,7 @@
   
     </div>
     <div class="mt-4" style="text-align: center;">
-      <button type="submit" class="btn btn-warning">Actualizar Empleado</button>
+      <button type="submit" class="btn btn-outline-success">Actualizar Combo</button>
     </div>
   
   </form>
