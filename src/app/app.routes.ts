@@ -6,6 +6,7 @@ import { ErrorPersonalizadoComponent } from './componentes/error-personalizado/e
 import { OrdenesPadreComponent } from './componentes/ordenes-padre/ordenes-padre.component';
 import { ActualizaComboComponent } from './componentes/actualiza-combo/actualiza-combo.component';
 import { ActualizaOrdenComponent } from './componentes/actualiza-orden/actualiza-orden.component';
+import { ActualizaEmpleadoComponent } from './componentes/actualiza-empleado/actualiza-empleado.component';
 
 export const routes: Routes = [
   {path: "", component: HomeComponentComponent},
@@ -13,6 +14,10 @@ export const routes: Routes = [
   {path: "combos", component: CombosComponentComponent},
   {path: "empleados", component: EmpleadosComponentComponent},
   {path: "actualizaOrden/:id", component: ActualizaOrdenComponent},
+  {path: "ordenes/actualizaOrden/:id", component: ActualizaOrdenComponent},
   {path: "actualizaCombo/:id", component: ActualizaComboComponent},
+  {path: "combos/actualizaCombo/:id", component: ActualizaComboComponent},
+  {path: "actualizaEmpleado/:id", component: ActualizaEmpleadoComponent},
+  {path: "empleados/actualizaEmpleado/:id", component: ActualizaEmpleadoComponent},
   {path: "**", component: ErrorPersonalizadoComponent}
 ];
