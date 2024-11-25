@@ -1,5 +1,5 @@
-<div class="container">
-  <form class="form-group" (ngSubmit)="accion_combo()" #formCombo="ngForm">
+<div class="container mt-4">
+  <form *ngIf="accion===1" class="form-group" (ngSubmit)="accion_combo()" #formCombo="ngForm">
 
     <div class="form-group row" >
       
@@ -58,7 +58,25 @@
     </div>
     <div class="mt-4" style="text-align: center;">
       <button type="submit" class="btn btn-outline-success" [disabled]="formCombo.invalid">Actualizar Combo</button>
+      <button (click)="volverHome()" class="btn btn-outline-secondary ms-2">Cancelar</button>
     </div>
   
   </form>
+
+  <!-- Card acción eliminar -->
+
+  <div *ngIf="accion === 2" class="card mt-4" style="width: 30rem;" id="datos_a_eliminar">
+    <div class="card-body">
+      <h5 class="card-title">Confirmar eliminación de <span style="color: red; font-weight: bold;">{{ cuadroNombre }}</span></h5>
+      <p class="card-text"><strong>Nombre del combo:</strong> {{ cuadroNombre }}</p>
+      <p class="card-text"><strong>Costo:</strong> {{ cuadroCostoCombo }}</p>
+      <p class="card-text"><strong>Fecha:</strong> {{ cuadroFecha }}</p>
+      <p class="card-text"><strong>Descripcion:</strong> ${{ cuadroDescripcion }}</p>
+      <div class="text-center">
+        <button (click)="accion_combo()" class="btn btn-outline-danger">Eliminar Combo</button>
+        <button (click)="volverHome()" class="btn btn-outline-secondary ms-2">Cancelar</button>
+      </div>
+    </div>
+  </div>
+<!-- Fin card con los datos del combo a eliminar -->
 </div>

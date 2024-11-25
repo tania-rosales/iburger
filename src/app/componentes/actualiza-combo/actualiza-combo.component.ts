@@ -18,7 +18,7 @@ export class ActualizaComboComponent implements OnInit{
   @Input() indice: number;
 
   volverHome(){
-    this.router.navigate(['']);
+    this.router.navigate(['combos']);
   }
 
   combos: combo[];
@@ -61,7 +61,7 @@ export class ActualizaComboComponent implements OnInit{
     }
 
     setTimeout(() => {
-      this.router.navigate(['']);
+      this.router.navigate(['combos']);
       
     }, 500);
   }

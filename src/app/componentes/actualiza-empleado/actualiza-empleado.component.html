@@ -1,1 +1,100 @@
-<p>actualiza-empleado works!</p>
+<div class="container">
+  <!-- Si la acción es la de actualizar-->
+  <form *ngIf="accion === 1" class="form-group" (ngSubmit)="accion_empleado()" #formEmpleado="ngForm">
+
+    <div class="form-group row">
+    
+      <div class="form-group col-md-4">
+        <label for="nombre">Nombre</label>
+        <input type="text" name="empleado" id="empleado" placeholder="Ingrese el nombre del empleado" class="form-control" [(ngModel)]="cuadroNombre" required
+        minlength="3"
+        #empleado="ngModel">
+        <div *ngIf="empleado.invalid && empleado.touched" class="text-danger">
+          <small *ngIf="empleado.errors?.['required']">El nombre es obligatorio.</small>
+          <small *ngIf="empleado.errors?.['minlength']">El nombre debe tener al menos 3 caracteres.</small>
+        </div>
+        
+      </div>
+  
+      <div class="form-group col-md-4">
+        <label for="apellido">Apellido</label>
+        <input type="text" name="apellido" id="apellido" placeholder="Ingrese el apellido del empleado" class="form-control" [(ngModel)]="cuadroApellido" required
+        #apellido="ngModel">
+        <div *ngIf="apellido.invalid && apellido.touched" class="text-danger">
+          <small>El apellido es obligatorio.</small>
+        </div>
+      </div>
+  
+      <div class="form-group col-md-4">
+        <label for="cargo">Cargo</label>
+        <input type="text" name="cargo" id="cargo" placeholder="Ingrese el cargo del empleado" class="form-control" [(ngModel)]="cuadroCargo" required
+        #cargo="ngModel">
+        <div *ngIf="cargo.invalid && cargo.touched" class="text-danger">
+          <small>El cargo es obligatorio.</small>
+        </div>
+      </div>
+  
+    </div>
+    <div class="form-group row mt-4">
+      
+      <div class="form-group col-md-4">
+        <label for="salario">Salario:</label>
+        <input type="number"  name="salario" id="salario" class="form-control" [(ngModel)]="cuadroSalario" placeholder="Ingrese salario" required
+        min="364.80"
+        #salario="ngModel">
+        <div *ngIf="salario.invalid && salario.touched" class="text-danger">
+          <small *ngIf="salario.errors?.['required']">El salario es obligatorio.</small>
+          <small *ngIf="salario.errors?.['min']">El salario debe ser mayor que $364.80.</small>
+        </div>
+      </div>
+      
+      <div class="form-group col-md-4">
+        <label for="fecha">Fecha de nacimiento:</label>
+        <input type="date" [max]="maxDate" name="fecha" id="fecha" class="form-control" [(ngModel)]="cuadroFechaNacimiento" required
+        #fecha="ngModel">
+        <div *ngIf="fecha.invalid && fecha.touched" class="text-danger">
+          <small>La fecha de nacimiento es obligatoria y no puede ser posterior a hoy.</small>
+        </div>
+      </div>
+  
+      <div class="form-group col-md-4">
+        <label for="fecha">Sexo:</label>
+        <select name="sexo" id="sexo" class="form-control" [(ngModel)]="cuadroSexo" required
+        #sexo="ngModel">
+          <option value="Masculino">Masculino</option>
+          <option value="Femenino">Femenino</option>
+        </select>
+        <div *ngIf="sexo.invalid && sexo.touched" class="text-danger">
+          <small>Seleccione un sexo.</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-4" style="text-align: center;">
+      <button type="submit" class="btn btn-outline-success" [disabled]="formEmpleado.invalid">Actualizar Empleado</button>
+      <button (click)="volverHome()" class="btn btn-outline-secondary ms-2">Cancelar</button>
+      
+    </div>
+
+  </form>
+
+<!-- Card si la acción es eliminar -->
+
+  <div *ngIf="accion === 2" class="card mt-4" style="width: 30rem;" id="datos_a_eliminar">
+    <div class="card-body">
+      <h5 class="card-title">Confirmar eliminación de <span style="color: red; font-weight: bold;">{{ cuadroNombre }}  {{ cuadroApellido }}</span></h5>
+      <p class="card-text"><strong>Nombre:</strong> {{ cuadroNombre }}</p>
+      <p class="card-text"><strong>Apellido:</strong> {{ cuadroApellido }}</p>
+      <p class="card-text"><strong>Cargo:</strong> {{ cuadroCargo }}</p>
+      <p class="card-text"><strong>Salario:</strong> ${{ cuadroSalario }}</p>
+      <p class="card-text"><strong>Fecha de nacimiento:</strong> {{ cuadroFechaNacimiento }}</p>
+      <p class="card-text"><strong>Sexo:</strong> {{ cuadroSexo }}</p>
+      <div class="text-center">
+        <button (click)="accion_empleado()" class="btn btn-outline-danger">Eliminar Empleado</button>
+        <button (click)="volverHome()" class="btn btn-outline-secondary ms-2">Cancelar</button>
+      </div>
+    </div>
+  </div>
+<!-- Fin card con los datos del empleado a eliminar -->
+
+</div>

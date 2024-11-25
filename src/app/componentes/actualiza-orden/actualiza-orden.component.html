@@ -1,7 +1,7 @@
 
 <div class="container">
 
-  <form class="form-group" (ngSubmit)="accion_orden()" #formOrden="ngForm">
+  <form *ngIf="accion === 1" class="form-group" (ngSubmit)="accion_orden()" #formOrden="ngForm">
 
     <div class="form-group row">  
       <!-- Validación para el campo Nombre del Combo -->
@@ -126,8 +126,28 @@
         [disabled]="formOrden.invalid"> 
         Actualizar Orden
       </button>
+      <button (click)="volverHome()" class="btn btn-outline-secondary ms-2">Cancelar</button>
     </div>
 
-  </form><br>
+  </form>
+
+  <!-- Card si la acción es eliminar -->
+
+  <div *ngIf="accion === 2" class="card mt-4" style="width: 30rem;" id="datos_a_eliminar">
+    <div class="card-body">
+      <h5 class="card-title">Confirmar eliminación de la orden</h5>
+      <p class="card-text"><strong>Cliente:</strong> {{ cuadroCliente }}</p>
+      <p class="card-text"><strong>Nombre del combo:</strong> {{ cuadroNombreCombo }}</p>
+      <p class="card-text"><strong>Costo:</strong> ${{ cuadroCosto }}</p>
+      <p class="card-text"><strong>Vendedor:</strong> {{ cuadroVendedor }}</p>
+      <p class="card-text"><strong>Fecha:</strong> {{ cuadroFecha }}</p>
+      <p class="card-text"><strong>Propina:</strong> ${{ cuadroPropina }}</p>
+      <div class="text-center">
+        <button (click)="accion_orden()" class="btn btn-outline-danger">Eliminar Empleado</button>
+        <button (click)="volverHome()" class="btn btn-outline-secondary ms-2">Cancelar</button>
+      </div>
+    </div>
+  </div>
+<!-- Fin card con los datos de la orden a eliminar -->
 
 </div>

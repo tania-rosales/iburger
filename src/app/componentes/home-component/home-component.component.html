@@ -67,7 +67,7 @@
             <input type="number" name="propina" id="propina" placeholder="Ingrese el monto de propina" class="form-control" [(ngModel)]="cuadroPropina" required min="0" #propina="ngModel">
 
             <div *ngIf="propina.invalid && propina.touched" class="text-danger">
-              <small *ngIf="propina.errors?.['required']">Ingrese valor de propina, si el cliente no dará propina digite el valor.</small>
+              <small *ngIf="propina.errors?.['required']">Ingrese valor de propina, si el cliente no dará propina digite el valor cero.</small>
               <small *ngIf="propina.errors?.['min']">La propina debe ser un valor positivo.</small>
             </div>
 

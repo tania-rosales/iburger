@@ -1,0 +1,11 @@
+#datos_a_eliminar{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30rem;
+}
+
+.container{
+  display: flex;
+  justify-content: center;
+}
