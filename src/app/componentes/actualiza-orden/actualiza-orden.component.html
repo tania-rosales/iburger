@@ -1,46 +1,131 @@
 
 <div class="container">
 
-  <form class="form-group" (ngSubmit)="accion_orden()">
+  <form class="form-group" (ngSubmit)="accion_orden()" #formOrden="ngForm">
 
-    <div class="form-group row">
+    <div class="form-group row">  
+      <!-- Validación para el campo Nombre del Combo -->
       <div class="form-group col-md-4">
         <label for="nombre">Nombre del Combo:</label>
-        <input type="text" name="nombreCombo" id="nombreCombo" class="form-control" [(ngModel)]="cuadroNombreCombo">
+        <select 
+          name="nombreCombo" 
+          id="nombreCombo" 
+          class="form-control" 
+          [(ngModel)]="cuadroNombreCombo" 
+          (change)="onComboChange($event)" 
+          required 
+          #nombreCombo="ngModel">
+          <option *ngFor="let combo of combos" [value]="combo.nombreCombo">{{ combo.nombreCombo }}</option>
+        </select>
+        <div *ngIf="nombreCombo.invalid && nombreCombo.touched" class="text-danger">
+          <small *ngIf="nombreCombo.errors?.['required']">El nombre del combo es obligatorio.</small>
+        </div>
       </div>
-  
+
+      <!-- Validación para el campo Costo -->
       <div class="form-group col-md-4">
         <label for="nombre">Costo:</label>
-        <input type="number" name="costo" id="costo" placeholder="Ingrese el costo" class="form-control" [(ngModel)]="cuadroCosto">
+        <input 
+          type="number" 
+          name="costo" 
+          id="costo" 
+          placeholder="Ingrese el costo" 
+          class="form-control" 
+          [(ngModel)]="cuadroCosto" 
+          required 
+          min="1" 
+          #costo="ngModel">
+        <div *ngIf="costo.invalid && costo.touched" class="text-danger">
+          <small *ngIf="costo.errors?.['required']">El costo es obligatorio.</small>
+          <small *ngIf="costo.errors?.['min']">El costo debe ser mayor a 0.</small>
+        </div>
       </div>
-  
+
+      <!-- Validación para el campo Vendedor -->
       <div class="form-group col-md-4">
         <label for="nombre">Vendedor:</label>
-        <input type="text" name="vendedor" id="vendedor" placeholder="Nombre del vendedor" class="form-control" [(ngModel)]="cuadroVendedor">
+        <select 
+          name="vendedor" 
+          id="vendedor" 
+          class="form-control" 
+          [(ngModel)]="cuadroVendedor" 
+          required 
+          #vendedor="ngModel">
+          <option *ngFor="let empleado of empleados" [value]="empleado.nombreEmpleado + ' ' + empleado.apellidoEmpleado">
+            {{ empleado.nombreEmpleado }} {{ empleado.apellidoEmpleado }}
+          </option>
+        </select>
+        <div *ngIf="vendedor.invalid && vendedor.touched" class="text-danger">
+          <small *ngIf="vendedor.errors?.['required']">El vendedor es obligatorio.</small>
+        </div>
       </div>
     </div>
 
     <div class="form-group row mt-4">
-
+      <!-- Validación para el campo Cliente -->
       <div class="form-group col-md-4">
         <label for="nombre">Cliente:</label>
-        <input type="text" name="cliente" id="cliente" placeholder="Nombre del cliente" class="form-control" [(ngModel)]="cuadroCliente">
+        <input 
+          type="text" 
+          name="cliente" 
+          id="cliente" 
+          placeholder="Nombre del cliente" 
+          class="form-control" 
+          [(ngModel)]="cuadroCliente" 
+          required 
+          minlength="3" 
+          #cliente="ngModel">
+        <div *ngIf="cliente.invalid && cliente.touched" class="text-danger">
+          <small *ngIf="cliente.errors?.['required']">El cliente es obligatorio.</small>
+          <small *ngIf="cliente.errors?.['minlength']">El cliente debe tener al menos 3 caracteres.</small>
+        </div>
       </div>
 
+      <!-- Validación para el campo Fecha -->
       <div class="form-group col-md-4">
         <label for="nombre">Fecha:</label>
-        <input type="date" [min]="minDate" [max]="maxDate" name="fecha" id="fecha" class="form-control" [(ngModel)]="cuadroFecha">
+        <input 
+          type="date" 
+          [min]="minDate" 
+          [max]="maxDate" 
+          name="fecha" 
+          id="fecha" 
+          class="form-control" 
+          [(ngModel)]="cuadroFecha" 
+          required 
+          #fecha="ngModel">
+        <div *ngIf="fecha.invalid && fecha.touched" class="text-danger">
+          <small *ngIf="fecha.errors?.['required']">La fecha es obligatoria.</small>
+        </div>
       </div>
 
+      <!-- Validación para el campo Propina -->
       <div class="form-group col-md-4">
         <label for="nombre">Propina:</label>
-        <input type="number" name="propina" id="propina" placeholder="Ingrese el monto de propina" class="form-control" [(ngModel)]="cuadroPropina">
+        <input 
+          type="number" 
+          name="propina" 
+          id="propina" 
+          placeholder="Ingrese el monto de propina" 
+          class="form-control" 
+          [(ngModel)]="cuadroPropina" 
+          required 
+          min="0" 
+          #propina="ngModel">
+        <div *ngIf="propina.invalid && propina.touched" class="text-danger">
+          <small *ngIf="propina.errors?.['required']">La propina es obligatoria.</small>
+          <small *ngIf="propina.errors?.['min']">La propina no puede ser un valor negativo.</small>
+        </div>
       </div>
-
     </div>
 
     <div class="mt-4" style="text-align: center;">
-      <button type="submit" class="btn btn-outline-success"> Actualizar Orden</button>
+      <button 
+        type="submit" 
+        class="btn btn-outline-success" 
+        [disabled]="formOrden.invalid"> 
+        Actualizar Orden
+      </button>
     </div>
 
   </form><br>

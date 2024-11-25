@@ -1,15 +1,20 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { orden } from '../../modelos/nueva-orden.models';
 import { FormsModule } from '@angular/forms';
 import { ordenesService } from '../../servicios/ordenes/ordenes.service';
+import { combo } from '../../modelos/nuevo-combo.models';
+import { combosService } from '../../servicios/combos/combos.service';
+import { empleado } from '../../modelos/nuevo-empleado.models';
+import { empleadosService } from '../../servicios/empleados/empleados.service';
 
 
 @Component({
   selector: 'app-actualiza-orden',
   standalone: true,
-  imports: [FormsModule],
-  providers: [],
+  imports: [FormsModule, CommonModule],
+  providers: [combosService, empleadosService],
   templateUrl: './actualiza-orden.component.html',
   styleUrl: './actualiza-orden.component.css'
 })
@@ -20,6 +25,8 @@ export class ActualizaOrdenComponent implements OnInit{
   }
 
   ordenes: orden[];
+  combos: combo[];
+  empleados: empleado[];
   cuadroNombreCombo: string = "";
   cuadroCosto: number = 0;
   cuadroVendedor: string = "";
@@ -31,8 +38,10 @@ export class ActualizaOrdenComponent implements OnInit{
   maxDate: string;
   indice: number;
   accion: number;
+  comboSeleccionado: string="";
+  mostrarInputCosto: boolean;
 
-  constructor(private router: Router, private ordenesService: ordenesService, private route: ActivatedRoute){
+  constructor(private router: Router, private ordenesService: ordenesService, private route: ActivatedRoute, private combosService: combosService, private empleadosService: empleadosService){
     const today = new Date();
     const year = today.getFullYear();
     const month = (today.getMonth() + 1).toString().padStart(2, '0');
@@ -55,6 +64,9 @@ export class ActualizaOrdenComponent implements OnInit{
     this.cuadroCliente = orden.cliente;
     this.cuadroFecha = orden.fecha;
     this.cuadroPropina = orden.propina
+
+    this.lista_combo();
+    this.lista_empleado();
 
   }
 
@@ -81,4 +93,35 @@ export class ActualizaOrdenComponent implements OnInit{
     }, 500);
 
   } /* Fin accion_orden */
+
+  lista_combo(){
+    this.combosService.obtener_combos().subscribe(
+      listaCombo => {
+        this.combos = Object.values(listaCombo);
+        this.combosService.set_combos(this.combos)
+      }
+    )
+  }
+
+  lista_empleado(){
+    this.empleadosService.obtener_empleados().subscribe(
+      listaEmpleado => {
+        this.empleados = Object.values(listaEmpleado);
+        this.empleadosService.set_empleados(this.empleados)
+      }
+    )
+  }
+
+
+  onComboChange (event: any) {
+    const selectedIndex = event.target.selectedIndex;
+    const comboSeleccionado = this.combosService.encontrar_combo(this.indice = selectedIndex)
+    if (comboSeleccionado){
+      this.cuadroCosto = comboSeleccionado.costo
+      this.mostrarInputCosto = true
+    } else {
+      this.cuadroCosto = 0;
+      this.mostrarInputCosto = false;
+    }
+  }
 }
