@@ -15,9 +15,7 @@ export const routes: Routes = [
   {path: "empleados", component: EmpleadosComponentComponent},
   {path: "actualizaOrden/:id", component: ActualizaOrdenComponent},
   {path: "ordenes/actualizaOrden/:id", component: ActualizaOrdenComponent},
-  {path: "actualizaCombo/:id", component: ActualizaComboComponent},
   {path: "combos/actualizaCombo/:id", component: ActualizaComboComponent},
-  {path: "actualizaEmpleado/:id", component: ActualizaEmpleadoComponent},
   {path: "empleados/actualizaEmpleado/:id", component: ActualizaEmpleadoComponent},
   {path: "**", component: ErrorPersonalizadoComponent}
 ];
