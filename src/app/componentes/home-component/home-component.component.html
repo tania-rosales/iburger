@@ -9,46 +9,74 @@
         <div class="form-group row">
           <div class="form-group col-md-4">
             <label for="nombre">Nombre del Combo:</label>
-            <select name="nombreCombo" id="nombreCombo" class="form-control" [(ngModel)]="cuadroNombreCombo" (change)="onComboChange($event)">
+            <select name="nombreCombo" id="nombreCombo" class="form-control" [(ngModel)]="cuadroNombreCombo" (change)="onComboChange($event)" required #nombreCombo="ngModel">
               <option *ngFor="let combo of combos" [value]="combo.nombreCombo">{{ combo.nombreCombo }}</option>
             </select>
+
+            <div *ngIf="nombreCombo.invalid && nombreCombo.touched" class="text-danger">
+              <small *ngIf="nombreCombo.errors?.['required']">Debe seleccionar el combo.</small>
+            </div>
+
           </div>
       
           <div class="form-group col-md-4">
             <label for="nombre">Costo:</label>
-            <input type="number" name="costo" id="costo" placeholder="Ingrese el costo" class="form-control" [(ngModel)]="cuadroCosto" [disabled]="mostrarInputCosto">
+            <input type="number" name="costo" id="costo" placeholder="Ingrese el costo" class="form-control" [(ngModel)]="cuadroCosto" [disabled]="mostrarInputCosto" required #costo="ngModel">
+            
+            <div *ngIf="costo.invalid && costo.touched" class="text-danger">
+              <small *ngIf="costo.errors?.['required']">Debe ingresar el costo.</small>
+            </div>
+
           </div>
       
           <div class="form-group col-md-4">
             <label for="nombre">Vendedor:</label>
-            <!-- <input type="text" name="vendedor" id="vendedor" placeholder="Nombre del vendedor" class="form-control" [(ngModel)]="cuadroVendedor"> -->
-            <select name="vendedor" id="vendedor" class="form-control" [(ngModel)]="cuadroVendedor">
+            <select name="vendedor" id="vendedor" class="form-control" [(ngModel)]="cuadroVendedor" required #vendedor="ngModel">
               <option *ngFor="let empleado of empleados" [value]="empleado.nombreEmpleado+' ' + empleado.apellidoEmpleado">{{ empleado.nombreEmpleado}} {{empleado.apellidoEmpleado}}</option>
             </select>
-          </div>
+
+            <div *ngIf="vendedor.invalid && vendedor.touched" class="text-danger">
+              <small *ngIf="vendedor.errors?.['required']">Debe seleccionar el vendedor.</small>
+            </div>
         </div>
     
         <div class="form-group row mt-4">
     
           <div class="form-group col-md-4">
             <label for="nombre">Cliente:</label>
-            <input type="text" name="cliente" id="cliente" placeholder="Nombre del cliente" class="form-control" [(ngModel)]="cuadroCliente">
+            <input type="text" name="cliente" id="cliente" placeholder="Nombre del cliente" class="form-control" [(ngModel)]="cuadroCliente" required minlength="3" #cliente="ngModel">
+
+            <div *ngIf="cliente.invalid && cliente.touched" class="text-danger">
+              <small *ngIf="cliente.errors?.['required']">El nombre del cliente es obligatorio.</small>
+              <small *ngIf="cliente.errors?.['minlength']">El nombre del cliente debe tener al menos 3 caracteres.</small>
+            </div>
+
           </div>
     
           <div class="form-group col-md-4">
             <label for="nombre">Fecha:</label>
-            <input type="date" [min]="minDate" [max]="maxDate" name="fecha" id="fecha" class="form-control" [(ngModel)]="cuadroFecha">
+            <input type="date" [min]="minDate" [max]="maxDate" name="fecha" id="fecha" class="form-control" [(ngModel)]="cuadroFecha" required #fecha="ngModel">
+            <div *ngIf="fecha.invalid && fecha.touched" class="text-danger">
+              <small *ngIf="fecha.errors?.['required']">Debe agregar la fecha.</small>
+            </div>
           </div>
     
           <div class="form-group col-md-4">
             <label for="nombre">Propina:</label>
-            <input type="number" name="propina" id="propina" placeholder="Ingrese el monto de propina" class="form-control" [(ngModel)]="cuadroPropina">
+            <input type="number" name="propina" id="propina" placeholder="Ingrese el monto de propina" class="form-control" [(ngModel)]="cuadroPropina" required min="0" #propina="ngModel">
+
+            <div *ngIf="propina.invalid && propina.touched" class="text-danger">
+              <small *ngIf="propina.errors?.['required']">Ingrese valor de propina, si el cliente no dará propina digite el valor.</small>
+              <small *ngIf="propina.errors?.['min']">La propina debe ser un valor positivo.</small>
+            </div>
+
           </div>
     
         </div>
+        </div>
 
         <div class="mt-4" style="text-align: center;">
-          <button type="submit" class="btn btn-success btn-lg me-4" (click)="guardar_orden()"> CONFIRMAR ORDEN</button>
+          <button type="submit" class="btn btn-success btn-lg me-4" [disabled]="formNuevaOrden.invalid" (click)="guardar_orden()"> CONFIRMAR ORDEN</button>
           <button type="submit" class="btn btn-danger btn-lg" (click)="limpiarFormulario(formNuevaOrden)"> CANCELAR ORDEN</button>
         </div>
 
@@ -62,5 +90,6 @@
 <div id="contenedor-ordenes">
   <app-ordenes *ngFor="let orden of ordenes; let i = index" [ordenesLista]="orden" [indice]="i"></app-ordenes>
 </div>
+
 </div>
 

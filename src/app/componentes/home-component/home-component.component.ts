@@ -33,8 +33,8 @@ export class HomeComponentComponent implements OnInit{
   estadoOrden: boolean = false;
   minDate: string;
   maxDate: string;
-  comboSeleccionado: string="";
   indice: number;
+  comboSeleccionado: string="";
   mostrarInputCosto: boolean;
   
   constructor (private miAlerta: ServicioAlertaService, private ordenesService:ordenesService, private combosService: combosService, private empleadosService: empleadosService){
