@@ -3,11 +3,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { combo } from '../../modelos/nuevo-combo.models';
 import { FormsModule } from '@angular/forms';
 import { combosService } from '../../servicios/combos/combos.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-actualiza-combo',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, CommonModule],
   providers: [],
   templateUrl: './actualiza-combo.component.html',
   styleUrl: './actualiza-combo.component.css'

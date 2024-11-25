@@ -1,32 +1,63 @@
 <div class="container">
-  <form class="form-group" (ngSubmit)="accion_combo()">
+  <form class="form-group" (ngSubmit)="accion_combo()" #formCombo="ngForm">
 
     <div class="form-group row" >
       
       <div class="form-group col-md-4">
         <label for="nombre">Nombre del Combo:</label>
-        <input type="text" name="combo" id="combo" placeholder="Ingrese el nombre del combo" class="form-control" [(ngModel)]="cuadroNombre">
+        <input type="text" name="combo" id="combo" placeholder="Ingrese el nombre del combo" class="form-control" [(ngModel)]="cuadroNombre" required 
+        minlength="3" 
+        #combo="ngModel">
+
+        <div *ngIf="combo.invalid && combo.touched" class="text-danger">
+          <small *ngIf="combo.errors?.['required']">El nombre del combo es obligatorio.</small>
+          <small *ngIf="combo.errors?.['minlength']">El nombre del combo debe tener al menos 3 caracteres.</small>
+        </div>
+
       </div>
   
       <div class="form-group col-md-4">
         <label for="nombre">Costo:</label>
-        <input type="number" name="costo" id="costo" placeholder="Ingrese el costo" class="form-control" [(ngModel)]="cuadroCostoCombo">
+        <input type="number" name="costo" id="costo" placeholder="Ingrese el costo" class="form-control" [(ngModel)]="cuadroCostoCombo" required 
+        min="1" 
+        #costo="ngModel">
+
+        <div *ngIf="costo.invalid && costo.touched" class="text-danger">
+          <small *ngIf="costo.errors?.['required']">El costo es obligatorio.</small>
+          <small *ngIf="costo.errors?.['min']">El costo debe ser mayor a 0.</small>
+        </div>
+
       </div>
   
       <div class="form-group col-md-4">
         <label for="nombre">Fecha:</label>
-        <input type="date" [min]="minDate" [max]="maxDate" name="fecha" id="fecha" class="form-control" [(ngModel)]="cuadroFecha">
+        <input type="date" [min]="minDate" [max]="maxDate" name="fecha" id="fecha" class="form-control" [(ngModel)]="cuadroFecha" required 
+        #fecha="ngModel">
+
+        <div *ngIf="fecha.invalid && fecha.touched" class="text-danger">
+          <small *ngIf="fecha.errors?.['required']">La fecha es obligatoria.</small>
+        </div>
+
       </div>
     </div>
     <div class="form-group row mt-4">
   
       <div class="form-group col-md-12">
-        <textarea class="form-control" id="descripcion" name="descripcion" [(ngModel)]="cuadroDescripcion" rows="3"></textarea>
+        <textarea class="form-control" id="descripcion" name="descripcion" [(ngModel)]="cuadroDescripcion" rows="3" required 
+        minlength="20" 
+        #descripcion="ngModel" 
+        placeholder="Ingrese una descripción del combo"></textarea>
+
+        <div *ngIf="descripcion.invalid && descripcion.touched" class="text-danger">
+          <small *ngIf="descripcion.errors?.['required']">La descripción es obligatoria.</small>
+          <small *ngIf="descripcion.errors?.['minlength']">La descripción debe tener al menos 20 caracteres.</small>
+        </div>
+
       </div>
   
     </div>
     <div class="mt-4" style="text-align: center;">
-      <button type="submit" class="btn btn-outline-success">Actualizar Combo</button>
+      <button type="submit" class="btn btn-outline-success" [disabled]="formCombo.invalid">Actualizar Combo</button>
     </div>
   
   </form>
