@@ -1,2 +1,7 @@
-<p>Lista de ordenes</p>
-<app-ordenes *ngFor="let orden of ordenes; let i = index" [ordenesLista]="orden" [indice]="i"></app-ordenes>
+<h4 class="text-center mt-4 mb-4">Listado de órdenes</h4>
+
+<div class="container">
+  <div id="contenedor-ordenes">
+    <app-ordenes *ngFor="let orden of ordenes; let i = index" [ordenesLista]="orden" [indice]="i"></app-ordenes>
+  </div>
+</div>
