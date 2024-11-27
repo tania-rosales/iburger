@@ -16,4 +16,14 @@ export class ServicioAlertaService {
     });
     
   }
+
+  warning(text:string){
+
+    Swal.fire({
+      title: "Atención",
+      text,
+      icon: "info"
+    });
+    
+  }
 }
