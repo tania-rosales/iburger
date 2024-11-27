@@ -76,7 +76,7 @@
         </div>
 
         <div class="mt-4" style="text-align: center;">
-          <button type="submit" class="btn btn-success btn-lg me-4" [disabled]="formNuevaOrden.invalid" (click)="guardar_orden()"> CONFIRMAR ORDEN</button>
+          <button type="submit" class="btn btn-success btn-lg me-4" [disabled]="formNuevaOrden.invalid" (click)="guardar_orden() " (click)="limpiarFormulario(formNuevaOrden)"> CONFIRMAR ORDEN</button>
           <button type="submit" class="btn btn-danger btn-lg" (click)="limpiarFormulario(formNuevaOrden)"> CANCELAR ORDEN</button>
         </div>
 
