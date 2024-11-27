@@ -1,0 +1,25 @@
+<div class="wrapper">
+  <div class="logo">
+      <img src="https://img.freepik.com/psd-gratis/hamburguesa-aislada-fondo-tinta-salpicaduras_1409-3855.jpg?semt=ais_hybrid" alt="">
+  </div>
+  <div class="text-center mt-4 name">
+      Registrarse en iBurger
+  </div>
+  <form class="p-3 mt-3" (ngSubmit)="onRegister()">
+      <div class="form-field d-flex align-items-center">
+        <input id="email" [(ngModel)]="email" name="email" type="email" required placeholder="Ingrese su correo"/>
+      </div>
+
+      <div class="form-field d-flex align-items-center">
+        <input id="password" [(ngModel)]="password" name="password" type="password" required placeholder="Ingrese su clave"/>
+      </div>
+      <button type="submit" class="btn mt-3">Registrase</button>
+      <div *ngIf="errorMessage" style="color: red; margin-top: 10px;">
+        {{ errorMessage }}
+      </div>
+  </form>
+
+  <div class="text-center fs-6">
+    Ya tengo cuenta <a class="text-center" href="/login">Iniciar Sesión</a>
+</div>
+</div>
